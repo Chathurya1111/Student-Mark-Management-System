@@ -1,0 +1,448 @@
+import java.util.Scanner;
+
+public class MiniProject26{
+
+    public static void main(String [] args){
+        int  [] rollNumber	= new int[100];
+        String []name = new String[100];
+        boolean [] conRec = new boolean [100];
+        // Subject
+        byte []pro	= new byte[100];
+        byte []dbms = new byte[100];
+        byte []coc = new byte[100];
+        byte []sad = new byte[100];
+        byte []dm = new byte [100];
+
+
+        for(int i = 0; i<conRec.length ;i++){
+            conRec [i] = false;
+            rollNumber [i] = i+1 ;
+        }
+
+
+        //Enterring 10 duplicate records to check programme
+        String Dname [] = {"J.M. Ramsan","H.K.C.D. Wijayathilake","K.V.S.S. Senarathna","T.M. Harini","T.P. Jayathilaka",
+                "C.W.W. Kannangara","T.M. Dilsan","M.M. Kumarika","L.O.V. Easvaran","R.H.L. Malsika"};
+        byte Dpro [] =  {100,97,96,54,36,71,26,56,66,15};
+        byte Ddbms [] = {99,95,76,69,46,54,15,96,65,56};
+        byte Dcoc [] = {95,95,64,80,46,54,25,36,51,63};
+        byte Dsad [] = {90,85,75,64,46,54,55,26,35,66};
+        byte Ddm [] =  {100,95,77,9,46,64,35,56,25,16};
+        for(int i = 0; i<10;i++){
+            conRec[i] = true;
+            name[i] = Dname[i];
+            dbms[i] = Ddbms[i];
+            pro[i] = Dpro[i];
+            coc[i] = Dcoc[i];
+            sad[i] = Dsad[i];
+            dm[i] = Ddm[i];
+        }// end of the duplicated record
+
+
+        int optionNo = 1;// just initialize the value to use try and catch
+        Scanner input = new Scanner(System.in);
+        do{
+            cls();
+            System.out.println("1. Enter Student Marks");
+            System.out.println("2. Edit Student Marks");
+            System.out.println("3. View Individual Marks");
+            System.out.println("4. View all student results");
+            System.out.println("5. Find Topper");
+            System.out.println("6. Subject Analysis");
+            System.out.println("7. About our group - 26");
+            System.out.println("8. Exit");
+
+
+            try{
+
+                System.out.print("Enter the serial No. order to choose option: ");
+                optionNo = input.nextInt();// getting user information to chose option
+                switch(optionNo){
+                    case 1 :
+
+                        byte conNewRec = 1;
+                        // Enter Mark of Students
+
+                        int k=0;
+                        for(int i=0;i<100;i++){	// this loop for drop already done arrays
+                            if (conRec [i] == false)
+                            {k=i;
+                                break;}
+                        }
+                        for(int i=k;i<100;i++){
+                            cls();//clear console
+
+                            if (conRec [i] == false){
+                                System.out.println();
+                                System.out.println("Student Serial No. : " + rollNumber[i]);
+                                System.out.print("Student Name  :   ");
+                                name[i] = input.nextLine();
+                                name[i] = input.nextLine();
+
+                                do{
+                                    System.out.print("Programming Mark \t\t\t\t: ");
+                                    pro[i] = input.nextByte();
+                                    if((pro[i]>100 ) | (pro[i]<0))
+                                    {
+                                        System.out.println(" Enter correct mark between Zero to Hundred \n");
+                                    }
+                                }while(pro[i]>100 | pro[i]<0);
+
+                                do{
+                                    System.out.print("DBMS Mark        \t\t\t\t: ");
+                                    dbms[i] = input.nextByte();
+                                    if((dbms[i]>100 )| (dbms[i]<0))
+                                    {
+                                        System.out.println(" Enter correct mark between Zero to Hundred \n");
+                                    }
+                                }while((dbms[i]>100) | (dbms[i]<0));
+
+
+                                do{
+                                    System.out.print("Computer Organization and Communication mark \t: ");
+                                    coc[i] = input.nextByte();
+                                    if((coc[i]>100) | (coc[i]<0))
+                                    {
+                                        System.out.println(" Enter correct mark between Zero to Hundred \n");
+                                    }
+                                }while(coc[i]>100 | coc[i]<0);
+
+
+                                do{
+                                    System.out.print("System Analysis and Design Mark \t\t: ");
+                                    sad[i] = input.nextByte();
+                                    if((sad[i]>100) | (sad[i]<0))
+                                    {
+                                        System.out.println(" Enter correct mark between Zero to Hundred \n");
+                                    }
+                                }while(sad[i]>100 | sad[i]<0);
+
+
+                                do{
+                                    System.out.print("Discrete Mathematics Mark  \t\t\t: ");
+                                    dm[i] = input.nextByte();
+                                    if((dm[i]>100) | (dm[i]<0))
+                                    {
+                                        System.out.println(" Enter correct mark between Zero to Hundred \n");
+                                    }
+                                }while(dm[i]>100 | dm[i]<0);
+
+
+                                conRec[i] = true;
+
+
+                                // request to new records
+                                System.out.println();
+                                System.out.print("If you dont have another record enter 0 else type other no.:");
+                                conNewRec = input.nextByte();
+                                if (conNewRec == 0){break;}
+
+                            }
+
+                        }
+                        break; // case one closed
+
+
+                    case 2 :
+                        int case2 = 0;
+                        do{
+
+                            cls();//clear console
+
+                            System.out.println();
+                            System.out.print("Enter Student roll number \t\t: ");
+                            byte search = input.nextByte();
+                            search -=1;//search option equalize to array index
+
+                            if(conRec[search]==true){//check this record already recorded to edit
+
+                                System.out.println("Name of the Student              : "+ name[search]);
+                                System.out.println();
+
+                                System.out.println("\t\t\t\t\tOld marks \tNew Marks");
+
+                                System.out.print("Programming marks \t\t\t: "+ pro[search]+"\t");
+                                grade(pro[search]);
+                                System.out.print("\t");
+                                pro[search]=input.nextByte();
+
+
+                                System.out.print("DBMS  \t\t\t\t\t: "+dbms[search] +"\t");
+                                grade(dbms[search]);
+                                System.out.print("\t");
+                                dbms[search]=input.nextByte();
+
+                                System.out.print("Computer Organization and Communication\t: "+coc[search] +"\t");
+                                grade(coc[search]);
+                                System.out.print("\t");
+                                coc[search]=input.nextByte();
+
+                                System.out.print("System Analysis and Design \t\t: " +sad[search] +"\t");
+                                grade(sad[search]);
+                                System.out.print("\t");
+                                sad[search]=input.nextByte();
+
+                                System.out.print("Discrete Mathematics \t\t\t: " +dm[search] +"\t");
+                                grade(dm[search]);
+                                System.out.print("\t");
+                                dm[search]=input.nextByte();
+                            }else{
+                                System.out.println("\t\t\t\t\tThis roll number still not recorded");
+                            }
+
+                            System.out.println();
+
+
+                            System.out.print("Enter 0 to Back, Press other number to search again  :  ");
+                            case2 = input.nextInt();
+                        }while(case2>0);
+                        break;
+
+
+
+
+                    case 3 :
+                        int case3 = 0;
+                        do{
+
+                            cls();//clear console
+
+                            System.out.println();
+                            System.out.print("Enter Student roll number \t: ");
+                            byte search = input.nextByte();
+                            search -=1;
+                            System.out.println("Name of the Student \t\t\t: "+ name[search]);
+
+
+                            System.out.println();
+                            System.out.println("\t\t\t\t\tMark\t\tGrade");
+                            System.out.println("\t\t\t\t\t-----\t\t-----");
+                            System.out.print("Programming marks     \t\t\t: "+ pro[search]   +"\t\t");
+                            grade(pro[search]);
+                            System.out.println();
+
+                            System.out.print("DBMS \t\t\t\t\t: "+dbms[search] +"\t\t");
+                            grade(dbms[search]);
+                            System.out.println();
+
+                            System.out.print("Computer Organization and Communication\t: "+coc[search] +"\t\t");
+                            grade(coc[search]);
+                            System.out.println();
+
+                            System.out.print("System Analysis and Design \t\t: " +sad[search] +"\t\t");
+                            grade(sad[search]);
+                            System.out.println();
+
+                            System.out.print("Discrete Mathematics  \t\t\t: " +dm[search] +"\t\t");
+                            grade(dm[search]);
+                            System.out.println();
+                            System.out.println();
+
+
+                            System.out.print("Enter 0 to Back, Press other number to search again  :  ");
+                            case3 = input.nextInt();
+                        }while(case3>0);
+
+
+
+                        break;//case three break
+                    case 4 :
+                        int case4 ;
+                        do{
+                            cls();//clear console
+                            System.out.println("R-No. \tName \tprogramming \tDBMS \tCOC \tSAD \tD-Math");
+
+                            for(int i=0;i<rollNumber.length;i++){
+
+                                if(conRec[i] == true){
+
+                                    System.out.println(rollNumber[i] + "\t" + name[i]);
+                                    System.out.println("\t\t\t"+pro[i]+"\t"+dbms[i] +"\t"+coc[i]+"\t"+sad[i]+"\t"+dm[i]);
+                                    System.out.println();
+
+
+                                }
+                            }
+                            System.out.print("Enter 0 to Back, Press other number to search again  :  ");
+                            case4 = input.nextInt();
+
+                        }while(case4>0);
+                        break;// case four break
+
+                    case 5 :
+                        int case5;
+                        int max=0;
+                        int catchid=0;
+                        do{
+                            cls();//clear console
+                            int [] top = new int[100];
+                            for(int i = 0; i< top.length;i++){//iterate all value to check
+                                top[i]=pro[i]+dbms[i]+coc[i]+sad[i]+dm[i];
+
+                                if(max<top[i]){
+                                    max=top[i];
+                                    catchid = i;
+                                }
+
+
+                            }
+
+                            int total =pro[catchid]+dbms[catchid]+coc[catchid]+sad[catchid]+dm[catchid];
+                            System.out.println("Roll Number                             : "+rollNumber[catchid]);
+                            System.out.println("Name of the Topper                      : "+name[catchid]);
+                            System.out.println("Programming                             : "+pro[catchid]);
+                            System.out.println("DBMS                                    : "+dbms[catchid]);
+                            System.out.println("Computer Organization and Communication : "+coc[catchid]);
+                            System.out.println("System analysis and Design              : "+sad[catchid]);
+                            System.out.println("Discrete Mathematics                    : "+dm[catchid]);
+
+
+
+                            System.out.print("Enter 0 to Back, Press other number to search again  :  ");
+                            case5 = input.nextInt();
+                        }while(case5>0);
+
+
+                        break;//case five break
+                    case 6 ://Subject analysis
+                        int case6;
+                        do{
+                            cls();//clear console
+                            int check;
+                            byte [] SelectedSub = new byte[100];
+                            do{
+                                System.out.println("Subject Analysis");
+                                System.out.println("--------------------------------------------");
+                                System.out.println("1. Programming Report");
+                                System.out.println("2. Database Management System");
+                                System.out.println("3. Computer organization and Communication");
+                                System.out.println("4. System Analysis and Design");
+                                System.out.println("5. Discrete mathematics");
+                                System.out.print("     Choose the number to view report  : ");
+                                check = input.nextInt();
+                            }while (check>5);
+                            for(int i=0;i<rollNumber.length;i++){
+                                if(SelectedSub[i]<1){
+                                    if(check==1){
+                                        SelectedSub[i] = pro[i];
+                                    }else if (check == 2){
+                                        SelectedSub[i] = dbms[i];
+                                    }else if (check == 3){
+                                        SelectedSub[i] = coc[i];
+                                    }else if (check == 4){
+                                        SelectedSub[i] = sad[i];
+                                    }else if (check == 5){
+                                        SelectedSub[i] = dm[i];
+                                    }
+                                }else{break;}
+                            }
+
+                            //Print Report
+                            System.out.println();
+                            System.out.println("Name               Score");
+                            for (int i=0;i<rollNumber.length;i++){
+                                if(conRec[i] == true){
+                                    System.out.println(name[i]);
+                                    System.out.print("               "+SelectedSub[i]+"     ");
+                                    grade(SelectedSub[i]);
+                                    System.out.println();
+                                }else{
+                                    break;
+                                }
+                            }
+
+
+                            System.out.print("Enter 0 to Back, Press other number to search again  :  ");
+                            case6 = input.nextInt();
+                        }while(case6>0);
+
+                        break;//case 6 break
+
+
+
+
+                    case 7 :
+                        int case7 ;
+                        do{
+                            cls();//clear console
+                            //Introducing team member
+                            System.out.println("Name of Team Members \t\tRegistration Id");
+                            System.out.println("01. J.M.Ramsan \t\t\t 523583751");
+                            System.out.println("02. H.K.C.D.Wijayathilake \t 523585827");
+                            System.out.println("03. K.V.S.S.Senarathna \t\t 523583779");
+                            System.out.println("04. M.R.M. Rifsan \t\t 523584579");
+                            System.out.println("05. R.D.N.Wirasha Jayawilal\t 523584460");
+                            System.out.println("06. K.R.Mohamed Siyam \t\t 523584138");
+                            System.out.println("07. U.D.C.D.Nawarathna \t\t 523586375");
+                            //explain about our programme
+                            System.out.println();
+                            System.out.println("About our programme");
+                            System.out.println("****************************");
+                            System.out.println("This programme has  designed to manage \nstudent marks and find grade\n");
+                            System.out.println("This programme consist");
+                            System.out.println("\tMultiple data type such as int, byte, String, arrays");
+                            System.out.println("\tIf-Statement and Switch statement of choose option");
+                            System.out.println("\tfor-Loops and Do-While Loops for iterate as we need");
+                            System.out.println("\tJump-statement to break iteration");
+                            System.out.println("\tTry and Catch - Exception to avoid error ");
+                            System.out.println("\tLogical operators OR and NOT");
+
+
+
+
+
+                            System.out.println("");
+                            System.out.print("Enter 0 to Back  :  ");
+                            case7 = input.nextInt();
+
+                        }while(case7>0);
+                        break;// case seven break
+                    case 8:
+                        optionNo =8;
+                        break;//break of case 8
+
+                }
+
+            }catch(Exception E){
+                cls();
+                System.out.println();
+                System.out.println("Input Miss match \n try again next time");
+                System.out.println();
+                optionNo = 9;
+            }
+
+        }while(optionNo !=8);
+    }
+
+
+    public static void grade(byte a){//this is for calculate grade
+        if (a>=85)		{System.out.print("A+");}
+        else if (a>=70){System.out.print("A");}
+        else if (a>=65){System.out.print("A-");}
+        else if (a>=60){System.out.print("B+");}
+        else if (a>=55){System.out.print("B");}
+        else if (a>=50){System.out.print("B-");}
+        else if (a>=45){System.out.print("C+");}
+        else if (a>=40){System.out.print("C");}
+        else if (a>=35){System.out.print("C-");}
+        else if (a>=30){System.out.print("D+");}
+        else if (a>=20){System.out.print("D");}
+        else { System.out.print("E");}
+    }
+
+
+    public static void cls(){
+
+        try{
+            new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+            System.out.println("");
+            System.out.println("");
+            System.out.println("Student Mark Management System - Group 26");
+            System.out.println("        Open University of SriLanka");
+            System.out.println("------------------------------------------");
+            System.out.println("");
+        }catch(Exception E)
+        {System.out.println(E);
+        }
+    }
+}
